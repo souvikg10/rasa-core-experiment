@@ -1,0 +1,67 @@
+intents:
+  - hello
+  - bye
+  - order_item
+  - make_order
+  - affirm
+  - deny
+  - WELCOME
+  - inform
+  
+entities:
+ - item
+ - number
+ - order_number
+slots:
+  number:
+    type: text
+  item:
+    type: text
+  order_number:
+    type: unfeauturized
+  available:
+    type: bool
+templates:
+  utter_greet:
+    - "Hello"
+  utter_goodbye:
+    - "Goodbye :("
+    - "Ciao"
+  utter_display_menu:
+    - "Here is our menu of the day: Coffee, Carrot Cake and Cookie"
+  utter_suggest_alternatives:
+   - "Oops, seems like we are out of {item}. Would like something else?"
+  utter_ask_how_many:
+    - "How many would like? "
+  utter_welcome:
+   - "Hi, I am here to help you order your quick to go meals."
+  utter_order_confirmation:
+  - text: "Would like to confirm your order?"
+    buttons:
+    - title: "Yes"
+      payload: "affirm"
+    - title: "No"
+      payload: "deny"
+  utter_cancel_order:
+  - "Okay, I have cancelled your order"
+  utter_anything_else:
+  - text: "Would like to order anything else?"
+    buttons:
+    - title: "Yes"
+      payload: "affirm"
+    - title: "No"
+      payload: "deny"
+actions:
+  - utter_greet
+  - utter_goodbye
+  - utter_display_menu
+  - utter_suggest_alternatives
+  - check_order_available
+  - utter_ask_how_many
+  - utter_welcome
+  - add_order
+  - remove_order
+  - utter_order_confirmation
+  - order_summary
+  - process_order
+  - utter_anything_else
