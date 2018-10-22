@@ -10,12 +10,11 @@ class ActionCheckOrder(Action):
      # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
     if(tracker.get_slot("item")):
       if(tracker.get_slot("item")== "Coffee"):
-        result = SlotSet("available",True)
+        return [SlotSet("available","available")]
       elif(tracker.get_slot("item")=="Cake"):
-        result = SlotSet("available",True)
-    else:
-      dispatcher.utter_template("utter_suggest_alternatives", tracker)
-    return result
+        return [SlotSet("available","available")]
+      else:
+        return [SlotSet("available","not_available")]
 
 class ActionAddOrder(Action):
    def name(self):
@@ -25,7 +24,7 @@ class ActionAddOrder(Action):
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
         
-        dispatcher.utter_message("Awesome!We have noted your order")
+        dispatcher.utter_message("Awesome!We have noted your order (Saving the order in the database)")
 
 class ActionSetOrderNumber(Action):
    def name(self):
@@ -35,7 +34,7 @@ class ActionSetOrderNumber(Action):
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
         number = tracker.get_slot("number")
-        return SlotSet("order_number",number)
+        return [SlotSet("order_number",number)]
 
 class ActionRemoveOrder(Action):
    def name(self):
@@ -44,7 +43,7 @@ class ActionRemoveOrder(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_message("Ok. We have removed your order. :(")
+        dispatcher.utter_message("Ok. We have removed your order.(Deleting the order from the database)")
 
 class ActionOrderSummary(Action):
    def name(self):
@@ -53,7 +52,8 @@ class ActionOrderSummary(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_message("Here is the summary for your order")    
+        message = "Here is the summary of your order: (Fetching Order from Database)" 
+        dispatcher.utter_message(message)    
 
 class ActionProcessOrder(Action):
    def name(self):
@@ -62,4 +62,4 @@ class ActionProcessOrder(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)      
+        dispatcher.utter_message("Thanks, We have sent your order to our kitchen. Please wait in the queque")      

@@ -19,7 +19,10 @@ slots:
   order_number:
     type: unfeaturized
   available:
-    type: bool
+    type: categorical
+    values:
+      - available
+      - not_available
 templates:
   utter_greet:
     - "Hello"
@@ -31,9 +34,11 @@ templates:
   utter_suggest_alternative:
    - "Oops, seems like we are out of {item}. Would like something else?"
   utter_ask_how_many:
-    - "How many would like? "
+    - "How many would you like? "
   utter_welcome:
    - "Hi, I am here to help you order your quick to go meals."
+  utter_default:
+   - "I don't completely understand what you mean? can you try again."
   utter_order_confirmation:
   - text: "Would like to confirm your order?"
     buttons:
@@ -64,3 +69,4 @@ actions:
   - order_summary
   - process_order
   - utter_anything_else
+  - utter_default

@@ -12,6 +12,7 @@
     "entity_number",
     "entity_order_number",
     "slot_available_0",
+    "slot_available_1",
     "slot_item_0",
     "slot_number_0",
     "prev_action_listen",
@@ -29,6 +30,7 @@
     "prev_utter_order_confirmation",
     "prev_order_summary",
     "prev_process_order",
-    "prev_utter_anything_else"
+    "prev_utter_anything_else",
+    "prev_utter_default"
   ]
 }

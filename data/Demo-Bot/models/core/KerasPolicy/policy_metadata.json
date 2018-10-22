@@ -1,0 +1,42 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": [
+        "number",
+        "item"
+      ]
+    },
+    "utter_goodbye": {
+      "slots": []
+    },
+    "check_order_available": {
+      "slots": [
+        "available"
+      ]
+    },
+    "utter_anything_else": {
+      "slots": []
+    },
+    "utter_greet": {
+      "slots": []
+    },
+    "utter_suggest_alternative": {
+      "slots": []
+    },
+    "process_order": {
+      "slots": []
+    },
+    "utter_display_menu": {
+      "slots": []
+    }
+  },
+  "rasa_core": "0.11.12",
+  "python": "3.6.6",
+  "max_histories": [
+    2
+  ],
+  "ensemble_name": "rasa_core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa_core.policies.keras_policy.KerasPolicy"
+  ]
+}

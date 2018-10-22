@@ -14,6 +14,7 @@ actions:
 - order_summary
 - process_order
 - utter_anything_else
+- utter_default
 config:
   store_entities_as_slots: true
 entities:
@@ -40,7 +41,10 @@ intents:
 slots:
   available:
     initial_value: null
-    type: rasa_core.slots.BooleanSlot
+    type: rasa_core.slots.CategoricalSlot
+    values:
+    - available
+    - not_available
   item:
     initial_value: null
     type: rasa_core.slots.TextSlot
@@ -59,9 +63,11 @@ templates:
       title: 'No'
     text: Would like to order anything else?
   utter_ask_how_many:
-  - text: 'How many would like? '
+  - text: 'How many would you like? '
   utter_cancel_order:
   - text: Okay, I have cancelled your order
+  utter_default:
+  - text: I don't completely understand what you mean? can you try again.
   utter_display_menu:
   - text: 'Here is our menu of the day: Coffee, Carrot Cake and Cookie'
   utter_goodbye:

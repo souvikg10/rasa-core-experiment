@@ -2,14 +2,14 @@
   "action_fingerprints": {
     "action_listen": {
       "slots": [
-        "item",
-        "number"
+        "number",
+        "item"
       ]
     },
-    "utter_greet": {
+    "utter_display_menu": {
       "slots": []
     },
-    "utter_display_menu": {
+    "utter_greet": {
       "slots": []
     },
     "check_order_available": {
@@ -17,7 +17,16 @@
         "available"
       ]
     },
+    "process_order": {
+      "slots": []
+    },
+    "utter_suggest_alternative": {
+      "slots": []
+    },
     "utter_goodbye": {
+      "slots": []
+    },
+    "utter_anything_else": {
       "slots": []
     }
   },

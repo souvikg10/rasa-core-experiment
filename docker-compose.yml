@@ -8,11 +8,13 @@ services:
       - ${PWD}/data:/app/data
     ports:
       - "5005:5005"
-    command: python -m rasa_core.run -c rest -c facebook  -d data/Demo-Bot/models/core/defaultPolicy --endpoints endpoints.yml --credentials credentials.yml
+    command: python -m rasa_core.run -c rest -c facebook  -d data/Demo-Bot/models/core/KerasPolicy --endpoints endpoints.yml --credentials credentials.yml --debug
   action:  
     image: action_server
     build:
       context: ./actions
+    volumes:
+      - ${PWD}/actions:/app
     ports:
       - "5055:5055"
     command : python -m rasa_core_sdk.endpoint --actions actions 
