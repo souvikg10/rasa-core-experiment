@@ -5,10 +5,10 @@ services:
     build:
       context: .
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/data:/app/data
     ports:
       - "5005:5005"
-    command: python -m rasa_core.run   -c rest -c facebook  -d data/Demo-Bot/models/core/defaultPolicy --endpoints endpoints.yml --credentials credentials.yml
+    command: python -m rasa_core.run -c rest -c facebook  -d data/Demo-Bot/models/core/defaultPolicy --endpoints endpoints.yml --credentials credentials.yml
   action:  
     image: action_server
     build:
@@ -21,7 +21,8 @@ services:
     build:
       context: ./nlg
     volumes:
-      - ${PWD}:/app
+      - ${PWD}/data:/app/data
     ports:
       - "5056:5056"
-    command : python nlg/nlg_server.py --port 5056 --domain data/servicing-bot-en/domain.yml
+    command : python nlg/nlg_server.py --port 5056 --domain data/Demo-Bot/domain.yml
+  

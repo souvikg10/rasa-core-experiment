@@ -1,8 +1,10 @@
+%YAML 1.1
+---
 actions:
 - utter_greet
 - utter_goodbye
 - utter_display_menu
-- utter_suggest_alternatives
+- utter_suggest_alternative
 - check_order_available
 - utter_ask_how_many
 - utter_welcome
@@ -19,36 +21,35 @@ entities:
 - number
 - order_number
 intents:
+- hello:
+    use_entities: true
+- bye:
+    use_entities: true
+- order_item:
+    use_entities: true
 - make_order:
+    use_entities: true
+- affirm:
     use_entities: true
 - deny:
     use_entities: true
 - WELCOME:
     use_entities: true
-- affirm:
-    use_entities: true
-- order_item:
-    use_entities: true
 - inform:
     use_entities: true
-- bye:
-    use_entities: true
-- hello:
-    use_entities: true
 slots:
+  available:
+    initial_value: null
+    type: rasa_core.slots.BooleanSlot
   item:
     initial_value: null
-    type: rasa_core.slots.CategoricalSlot
-    values:
-    - coffee
-    - cake
-    - cookie
+    type: rasa_core.slots.TextSlot
   number:
     initial_value: null
     type: rasa_core.slots.TextSlot
   order_number:
     initial_value: null
-    type: rasa_core.slots.TextSlot
+    type: rasa_core.slots.UnfeaturizedSlot
 templates:
   utter_anything_else:
   - buttons:
@@ -57,6 +58,8 @@ templates:
     - payload: deny
       title: 'No'
     text: Would like to order anything else?
+  utter_ask_how_many:
+  - text: 'How many would like? '
   utter_cancel_order:
   - text: Okay, I have cancelled your order
   utter_display_menu:
@@ -73,7 +76,7 @@ templates:
     - payload: deny
       title: 'No'
     text: Would like to confirm your order?
-  utter_suggest_alternatives:
+  utter_suggest_alternative:
   - text: Oops, seems like we are out of {item}. Would like something else?
   utter_welcome:
   - text: Hi, I am here to help you order your quick to go meals.

@@ -26,6 +26,8 @@ ADD . .
 
 RUN pip install rasa_core_sdk
 
+RUN pip install -r requirements.txt
+
 EXPOSE 5055
 
 CMD python -m rasa_core_sdk.endpoint --actions actions 

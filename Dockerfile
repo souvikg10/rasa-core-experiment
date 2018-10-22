@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:3.6-slim
 
 SHELL ["/bin/bash", "-c"]
 
@@ -29,10 +29,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 ADD . .
 
-RUN git clone https://github.com/RasaHQ/rasa_core.git && \
-cd rasa_core && \
-pip install -r requirements.txt && \
-pip install -e .
+RUN pip install rasa_core==0.11.12
 
 RUN pip install sklearn_crfsuite
 VOLUME ["/app/data"]

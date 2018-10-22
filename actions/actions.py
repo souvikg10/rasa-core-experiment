@@ -1,5 +1,5 @@
 from rasa_core_sdk import Action
-
+from rasa_core_sdk.events import SlotSet
 
 class ActionCheckOrder(Action):
    def name(self):
@@ -7,8 +7,15 @@ class ActionCheckOrder(Action):
       return "check_order_available"
 
    def run(self, dispatcher, tracker, domain):
-      # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_suggest_alternatives", tracker)
+     # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
+    if(tracker.get_slot("item")):
+      if(tracker.get_slot("item")== "Coffee"):
+        result = SlotSet("available",True)
+      elif(tracker.get_slot("item")=="Cake"):
+        result = SlotSet("available",True)
+    else:
+      dispatcher.utter_template("utter_suggest_alternatives", tracker)
+    return result
 
 class ActionAddOrder(Action):
    def name(self):
@@ -17,7 +24,8 @@ class ActionAddOrder(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)
+        
+        dispatcher.utter_message("Awesome!We have noted your order")
 
 class ActionSetOrderNumber(Action):
    def name(self):
@@ -26,7 +34,8 @@ class ActionSetOrderNumber(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)
+        number = tracker.get_slot("number")
+        return SlotSet("order_number",number)
 
 class ActionRemoveOrder(Action):
    def name(self):
@@ -35,16 +44,7 @@ class ActionRemoveOrder(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)
-
-class ActionOrderConfirmation(Action):
-   def name(self):
-      # type: () -> Text
-      return "order_confirmation"
-
-   def run(self, dispatcher, tracker, domain):
-      # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)      
+        dispatcher.utter_message("Ok. We have removed your order. :(")
 
 class ActionOrderSummary(Action):
    def name(self):
@@ -53,7 +53,7 @@ class ActionOrderSummary(Action):
 
    def run(self, dispatcher, tracker, domain):
       # type: (Dispatcher, DialogueStateTracker, Domain) -> List[Event]
-        dispatcher.utter_template("utter_card_retrieval_confirmed", tracker)      
+        dispatcher.utter_message("Here is the summary for your order")    
 
 class ActionProcessOrder(Action):
    def name(self):
